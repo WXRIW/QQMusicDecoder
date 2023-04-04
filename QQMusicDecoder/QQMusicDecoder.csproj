@@ -5,6 +5,7 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Description>QQ Music Lyrics Decoder by WXRIW &amp; cnbluefire</Description>
   </PropertyGroup>
 
   <ItemGroup>
