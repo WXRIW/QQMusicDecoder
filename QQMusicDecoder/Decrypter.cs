@@ -31,22 +31,8 @@ namespace QQMusicDecoder
             try
             {
                 // 拿到结果
-                switch (RuntimeInformation.OSArchitecture)
-                {
-                    case Architecture.X86:
-                        result = ExternalDecrypter.qrcdecode(new IntPtr(handle.Pointer), memory.Length);
-                        break;
-                    case Architecture.X64:
-                        result = ExternalDecrypter64.qrcdecode(new IntPtr(handle.Pointer), memory.Length);
-                        break;
-                    case Architecture.Arm:
-                        break;
-                    case Architecture.Arm64:
-                        break;
-                    default:
-                        result = ExternalDecrypter.qrcdecode(new IntPtr(handle.Pointer), memory.Length);
-                        break;
-                }
+                result = QrcDecodeNative(new IntPtr(handle.Pointer), memory.Length);
+
                 if (result != IntPtr.Zero)
                 {
                     // 此时传入的内存已经被解密，裁剪掉[offset:0]头
@@ -82,19 +68,8 @@ namespace QQMusicDecoder
             inputStream.CopyTo(decompressed);
             return decompressed.ToArray();
         }
-    }
 
-    internal class ExternalDecrypter
-    {
-
-        [DllImport("LyricDecoder")]
-        public unsafe static extern IntPtr qrcdecode(IntPtr src, int src_len);
-    }
-
-    internal class ExternalDecrypter64
-    {
-
-        [DllImport("LyricDecoder64")]
-        public unsafe static extern IntPtr qrcdecode(IntPtr src, int src_len);
+        [DllImport("LyricDecoder.dll", EntryPoint = "qrcdecode", PreserveSig = true, ExactSpelling = false)]
+        private static extern IntPtr QrcDecodeNative(IntPtr src, int src_len);
     }
 }

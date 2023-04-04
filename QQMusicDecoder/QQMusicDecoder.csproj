@@ -6,6 +6,7 @@
     <Nullable>enable</Nullable>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Description>QQ Music Lyrics Decoder by WXRIW &amp; cnbluefire</Description>
+    <Platforms>x86;x64</Platforms>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,12 +14,10 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Update="LyricDecoder.dll">
+    <ContentWithTargetPath Include="NativeLibrary\$(Platform)\LyricDecoder.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
-    <None Update="LyricDecoder64.dll">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+      <TargetPath>LyricDecoder.dll</TargetPath>
+	</ContentWithTargetPath>
   </ItemGroup>
 
 </Project>
