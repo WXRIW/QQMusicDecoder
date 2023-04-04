@@ -6,5 +6,5 @@ QRC decoder, with a simple demo
 也可以直接解密 QRC 歌词 `Decrypter.DecryptLyrics(string)`。  
 
 ### 特别感谢
-[@cnbluefire](https://github.com/cnbluefire)
+[@cnbluefire](https://github.com/cnbluefire)  
 [SuJiKiNen/LyricDecoder](https://github.com/SuJiKiNen/LyricDecoder)
