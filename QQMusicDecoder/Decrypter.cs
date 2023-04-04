@@ -31,13 +31,21 @@ namespace QQMusicDecoder
             try
             {
                 // 拿到结果
-                if (Environment.Is64BitProcess)
+                switch (RuntimeInformation.OSArchitecture)
                 {
-                    result = ExternalDecrypter64.qrcdecode(new IntPtr(handle.Pointer), memory.Length);
-                }
-                else
-                {
-                    result = ExternalDecrypter.qrcdecode(new IntPtr(handle.Pointer), memory.Length);
+                    case Architecture.X86:
+                        result = ExternalDecrypter.qrcdecode(new IntPtr(handle.Pointer), memory.Length);
+                        break;
+                    case Architecture.X64:
+                        result = ExternalDecrypter64.qrcdecode(new IntPtr(handle.Pointer), memory.Length);
+                        break;
+                    case Architecture.Arm:
+                        break;
+                    case Architecture.Arm64:
+                        break;
+                    default:
+                        result = ExternalDecrypter.qrcdecode(new IntPtr(handle.Pointer), memory.Length);
+                        break;
                 }
                 if (result != IntPtr.Zero)
                 {
