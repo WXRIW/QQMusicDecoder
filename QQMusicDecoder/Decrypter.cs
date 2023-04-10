@@ -34,17 +34,29 @@ namespace QQMusicDecoder
                 switch (RuntimeInformation.OSArchitecture)
                 {
                     case Architecture.X86:
-                        result = ExternalDecrypter.qrcdecode(new IntPtr(handle.Pointer), memory.Length);
-                        break;
                     case Architecture.X64:
-                        result = ExternalDecrypter64.qrcdecode(new IntPtr(handle.Pointer), memory.Length);
+                        if (IntPtr.Size == 8)
+                        {
+                            result = ExternalDecrypter64.QrcDecode(new IntPtr(handle.Pointer), memory.Length);
+                        }
+                        else
+                        {
+                            result = ExternalDecrypter.QrcDecode(new IntPtr(handle.Pointer), memory.Length);
+                        }
                         break;
                     case Architecture.Arm:
-                        break;
                     case Architecture.Arm64:
+                        if (IntPtr.Size == 8)
+                        {
+                            result = ExternalDecrypter64.QrcDecode(new IntPtr(handle.Pointer), memory.Length);
+                        }
+                        else
+                        {
+                            result = ExternalDecrypter.QrcDecode(new IntPtr(handle.Pointer), memory.Length);
+                        }
                         break;
                     default:
-                        result = ExternalDecrypter.qrcdecode(new IntPtr(handle.Pointer), memory.Length);
+                        result = ExternalDecrypter.QrcDecode(new IntPtr(handle.Pointer), memory.Length);
                         break;
                 }
                 if (result != IntPtr.Zero)
@@ -86,15 +98,19 @@ namespace QQMusicDecoder
 
     internal class ExternalDecrypter
     {
-
-        [DllImport("LyricDecoder")]
-        public unsafe static extern IntPtr qrcdecode(IntPtr src, int src_len);
+        [DllImport("LyricDecoder.dll", EntryPoint = "qrcdecode", PreserveSig = true, ExactSpelling = false)]
+        public unsafe static extern IntPtr QrcDecode(IntPtr src, int src_len);
     }
 
     internal class ExternalDecrypter64
     {
+        [DllImport("LyricDecoder64.dll", EntryPoint = "qrcdecode", PreserveSig = true, ExactSpelling = false)]
+        public unsafe static extern IntPtr QrcDecode(IntPtr src, int src_len);
+    }
 
-        [DllImport("LyricDecoder64")]
-        public unsafe static extern IntPtr qrcdecode(IntPtr src, int src_len);
+    internal class ExternalDecrypterArm64
+    {
+        [DllImport("LyricDecoderArm64.dll", EntryPoint = "qrcdecode", PreserveSig = true, ExactSpelling = false)]
+        public unsafe static extern IntPtr QrcDecode(IntPtr src, int src_len);
     }
 }
