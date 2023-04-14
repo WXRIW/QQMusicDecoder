@@ -44,16 +44,8 @@ namespace QQMusicDecoder
                             result = ExternalDecrypter.QrcDecode(new IntPtr(handle.Pointer), memory.Length);
                         }
                         break;
-                    case Architecture.Arm:
                     case Architecture.Arm64:
-                        if (IntPtr.Size == 8)
-                        {
-                            result = ExternalDecrypter64.QrcDecode(new IntPtr(handle.Pointer), memory.Length);
-                        }
-                        else
-                        {
-                            result = ExternalDecrypter.QrcDecode(new IntPtr(handle.Pointer), memory.Length);
-                        }
+                        result = ExternalDecrypterArm64.QrcDecode(new IntPtr(handle.Pointer), memory.Length);
                         break;
                     default:
                         result = ExternalDecrypter.QrcDecode(new IntPtr(handle.Pointer), memory.Length);
