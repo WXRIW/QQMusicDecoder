@@ -1,4 +1,5 @@
 ﻿using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
+using System;
 using System.Runtime.InteropServices;
 using System.Text;
 
@@ -31,18 +32,13 @@ namespace QQMusicDecoder
             try
             {
                 // 拿到结果
-                switch (RuntimeInformation.OSArchitecture)
+                switch (RuntimeInformation.ProcessArchitecture)
                 {
                     case Architecture.X86:
+                        result = ExternalDecrypter.QrcDecode(new IntPtr(handle.Pointer), memory.Length);
+                        break;
                     case Architecture.X64:
-                        if (IntPtr.Size == 8)
-                        {
-                            result = ExternalDecrypter64.QrcDecode(new IntPtr(handle.Pointer), memory.Length);
-                        }
-                        else
-                        {
-                            result = ExternalDecrypter.QrcDecode(new IntPtr(handle.Pointer), memory.Length);
-                        }
+                        result = ExternalDecrypter64.QrcDecode(new IntPtr(handle.Pointer), memory.Length);
                         break;
                     case Architecture.Arm64:
                         result = ExternalDecrypterArm64.QrcDecode(new IntPtr(handle.Pointer), memory.Length);
