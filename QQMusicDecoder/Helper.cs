@@ -159,29 +159,29 @@ namespace QQMusicDecoder
             }
         }
 
+        public readonly static HttpClient Client = new();
+
         protected static string Post(string url, Dictionary<string, string> paramDict)
         {
-            using var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Post, url);
             request.Headers.Add("ContentType", "application/x-www-form-urlencoded");
             request.Headers.Add("Referer", "https://c.y.qq.com/");
             request.Headers.Add("UserAgent", UserAgent);
             request.Headers.Add("Cookie", Cookie);
             request.Content = new FormUrlEncodedContent(paramDict);
-            var response = client.SendAsync(request).Result;
+            var response = Client.SendAsync(request).Result;
             return response.Content.ReadAsStringAsync().Result;
         }
 
         protected static async Task<string> PostAsync(string url, Dictionary<string, string> paramDict)
         {
-            using var client = new HttpClient();
             var request = new HttpRequestMessage(HttpMethod.Post, url);
             request.Headers.Add("ContentType", "application/x-www-form-urlencoded");
             request.Headers.Add("Referer", "https://c.y.qq.com/");
             request.Headers.Add("UserAgent", UserAgent);
             request.Headers.Add("Cookie", Cookie);
             request.Content = new FormUrlEncodedContent(paramDict);
-            var response = await client.SendAsync(request);
+            var response = await Client.SendAsync(request);
             return await response.Content.ReadAsStringAsync();
         }
 
