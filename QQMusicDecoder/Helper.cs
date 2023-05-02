@@ -80,7 +80,7 @@ namespace QQMusicDecoder
                 string decompressText;
                 //try
                 //{
-                    decompressText = Decrypter.DecryptLyrics(text) ?? "";
+                decompressText = Decrypter.DecryptLyrics(text) ?? "";
                 //}
                 //catch
                 //{
