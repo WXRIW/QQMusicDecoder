@@ -5,9 +5,7 @@ namespace QQMusicDecoder
 {
     public unsafe class Decrypter
     {
-
         private readonly static byte[] QQKey = Encoding.ASCII.GetBytes("!@#)(*$%123ZXC!@!@#)(NHL");
-
 
         /// <summary>
         /// 解密 QRC 歌词
@@ -16,7 +14,6 @@ namespace QQMusicDecoder
         /// <returns>解密后的 QRC 歌词</returns>
         public static string? DecryptLyrics(string encryptedLyrics)
         {
-            var res = string.Empty;
             var encryptedTextByte = Convert.FromHexString(encryptedLyrics); // parse text to bites array
             byte[] data = new byte[encryptedTextByte.Length];
             byte[][][] schedule = new byte[3][][];
