@@ -1,6 +1,4 @@
 ﻿using ICSharpCode.SharpZipLib.Zip.Compression.Streams;
-using System.Globalization;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace QQMusicDecoder
@@ -22,10 +20,10 @@ namespace QQMusicDecoder
             var encryptedTextByte = Convert.FromHexString(encryptedLyrics); // parse text to bites array
             byte[] data = new byte[encryptedTextByte.Length];
             byte[][][] schedule = new byte[3][][];
-            for(int i = 0; i<3;i++)
+            for (int i = 0; i < 3; i++)
             {
                 schedule[i] = new byte[16][];
-                for(int j = 0; j<16; j++)
+                for (int j = 0; j < 16; j++)
                 {
                     schedule[i][j] = new byte[6];
                 }
@@ -35,12 +33,12 @@ namespace QQMusicDecoder
             {
                 var temp = new byte[8];
                 DESHelper.TripleDESCrypt(encryptedTextByte[i..], temp, schedule);
-                for(int j = 0; j < 8; j++)
+                for (int j = 0; j < 8; j++)
                 {
-                    data[i+j] = temp[j];
+                    data[i + j] = temp[j];
                 }
             }
-                
+
             var unzip = SharpZipLibDecompress(data);
             var result = Encoding.UTF8.GetString(unzip);
             return result;

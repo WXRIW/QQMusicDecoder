@@ -1,11 +1,9 @@
-﻿using System;
-
-namespace QQMusicDecoder
+﻿namespace QQMusicDecoder
 {
     public static class DESHelper
     {
         public static readonly uint ENCRYPT = 1;
-        public static readonly uint  DECRYPT = 0;
+        public static readonly uint DECRYPT = 0;
 
         private static uint BITNUM(byte[] a, int b, int c)
         {
