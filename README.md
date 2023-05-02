@@ -7,4 +7,5 @@ QRC decoder, with a simple demo
 
 ### 特别感谢
 [@cnbluefire](https://github.com/cnbluefire)  
-[SuJiKiNen/LyricDecoder](https://github.com/SuJiKiNen/LyricDecoder)
+[SuJiKiNen/LyricDecoder](https://github.com/SuJiKiNen/LyricDecoder)  
+[@Raspberry-Monster](https://github.com/Raspberry-Monster)  
