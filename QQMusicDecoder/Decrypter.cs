@@ -3,7 +3,7 @@ using System.Text;
 
 namespace QQMusicDecoder
 {
-    public unsafe class Decrypter
+    public class Decrypter
     {
         private readonly static byte[] QQKey = Encoding.ASCII.GetBytes("!@#)(*$%123ZXC!@!@#)(NHL");
 
@@ -43,9 +43,9 @@ namespace QQMusicDecoder
 
         protected static byte[] SharpZipLibDecompress(byte[] data)
         {
-            var compressed = new MemoryStream(data);
-            var decompressed = new MemoryStream();
-            var inputStream = new InflaterInputStream(compressed);
+            using var compressed = new MemoryStream(data);
+            using var decompressed = new MemoryStream();
+            using var inputStream = new InflaterInputStream(compressed);
 
             inputStream.CopyTo(decompressed);
 
