@@ -14,7 +14,7 @@ namespace QQMusicDecoder
         /// <returns>解密后的 QRC 歌词</returns>
         public static string? DecryptLyrics(string encryptedLyrics)
         {
-            var encryptedTextByte = Convert.FromHexString(encryptedLyrics); // parse text to bites array
+            var encryptedTextByte = HexStringToByteArray(encryptedLyrics); // parse text to bites array
             byte[] data = new byte[encryptedTextByte.Length];
             byte[][][] schedule = new byte[3][][];
             for (int i = 0; i < 3; i++)
@@ -50,6 +50,17 @@ namespace QQMusicDecoder
             inputStream.CopyTo(decompressed);
 
             return decompressed.ToArray();
+        }
+
+        protected static byte[] HexStringToByteArray(string hexString)
+        {
+            int length = hexString.Length;
+            byte[] bytes = new byte[length / 2];
+            for (int i = 0; i < length; i += 2)
+            {
+                bytes[i / 2] = Convert.ToByte(hexString.Substring(i, 2), 16);
+            }
+            return bytes;
         }
     }
 }
