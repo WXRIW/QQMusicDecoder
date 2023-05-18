@@ -78,14 +78,14 @@ namespace QQMusicDecoder
                 }
 
                 string decompressText;
-                //try
-                //{
-                decompressText = Decrypter.DecryptLyrics(text) ?? "";
-                //}
-                //catch
-                //{
-                //    continue;
-                //}
+                try
+                {
+                    decompressText = Decrypter.DecryptLyrics(text) ?? "";
+                }
+                catch
+                {
+                    continue;
+                }
 
                 var s = "";
                 if (decompressText.Contains("<?xml"))
