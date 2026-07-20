@@ -1,3 +1,7 @@
+> [!TIP]
+> 本仓库已并入 [Lyricify-Lyrics-Helper](https://github.com/WXRIW/Lyricify-Lyrics-Helper)。  
+> 后续相关更新及修复仅在 [Lyricify-Lyrics-Helper](https://github.com/WXRIW/Lyricify-Lyrics-Helper) 中提供。
+
 # QQMusicDecoder
 QRC decoder, with a simple demo
 
